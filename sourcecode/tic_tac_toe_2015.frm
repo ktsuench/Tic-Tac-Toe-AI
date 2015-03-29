@@ -320,7 +320,7 @@ Private Sub cmd_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x
         If Not endgame Then nextmove
     End If
     
-    If horwin() Or verwin() Or diawin() Or gridfilled Then endgame = True: gameover
+    If Not endgame Then If horwin() Or verwin() Or diawin() Or gridfilled Then endgame = True: gameover
     
 End Sub
 
