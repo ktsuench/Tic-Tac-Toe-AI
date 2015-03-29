@@ -211,24 +211,33 @@ End Function
 
 Public Function dir(ByVal sdir As Integer, ByVal cond As Integer, ByVal inc As Integer)
 
-    Dim i As Integer, k As Integer, x As String, y As String, z As String, res As Integer
+    Dim i As Integer, j As Integer, k As Integer, x As String, y As String, z As String, res As Integer
 
     i = 1
     res = -1
     
+    For j = 1 To 3
+        x = IIf(sdir = 1 Or sdir = 2, cmd(i - 1).Caption, cmd(1 - k).Caption)
+        y = IIf(sdir = 1, cmd(i).Caption, IIf(sdir = 2, cmd(i + IIf(sdir = 2, 0, -3) + 2).Caption, cmd(4).Caption))
+        z = IIf(sdir = 1, cmd(i + 1).Caption, IIf(sdir = 2, cmd(i + IIf(sdir = 2, 0, -6) + 5).Caption, cmd(7 + k).Caption))
+    
+        If Len(x) > 0 And Len(y) > 0 And Len(z) > 0 Then If x = y And x = z Then res = -2: winner = IIf(x = "x", 1, 2)
+        
+        i = i + inc
+    Next j
+    
+    i = 1
+    
     Do While res < 0 And i <= cond And res <> -2
         k = IIf(sdir = 3, IIf(i = 1, 1, -1), 1)
+        
         x = IIf(sdir = 1 Or sdir = 2, cmd(i - 1).Caption, cmd(1 - k).Caption)
         y = IIf(sdir = 1, cmd(i).Caption, IIf(sdir = 2, cmd(i + IIf(sdir = 2, 0, -3) + 2).Caption, cmd(4).Caption))
         z = IIf(sdir = 1, cmd(i + 1).Caption, IIf(sdir = 2, cmd(i + IIf(sdir = 2, 0, -6) + 5).Caption, cmd(7 + k).Caption))
         
-        If Len(x) > 0 And Len(y) > 0 And Len(z) > 0 Then
-            If x = y And x = z Then res = -2: winner = IIf(x = "x", 1, 2)
-        Else
-            If Len(x) > 0 And Len(y) > 0 And x = "x" Then If x = y Then res = IIf(sdir = 1, i + 1, IIf(sdir = 2, i + 5, 7 + k))
-            If Len(x) > 0 And Len(z) > 0 And x = "x" Then If x = z Then res = IIf(sdir = 1, i, IIf(sdir = 2, i + 2, 4))
-            If Len(y) > 0 And Len(z) > 0 And y = "x" Then If y = z Then res = IIf(sdir = 1 Or sdir = 2, i - 1, 1 - k)
-        End If
+        If Len(x) > 0 And Len(y) > 0 And x = "x" Then If x = y Then res = IIf(sdir = 1, i + 1, IIf(sdir = 2, i + 5, 7 + k)): If Len(cmd(res).Caption) > 0 Then res = -1
+        If Len(x) > 0 And Len(z) > 0 And x = "x" Then If x = z Then res = IIf(sdir = 1, i, IIf(sdir = 2, i + 2, 4)): If Len(cmd(res).Caption) > 0 Then res = -1
+        If Len(y) > 0 And Len(z) > 0 And y = "x" Then If y = z Then res = IIf(sdir = 1 Or sdir = 2, i - 1, 1 - k): If Len(cmd(res).Caption) > 0 Then res = -1
         
         i = i + inc
     Loop
