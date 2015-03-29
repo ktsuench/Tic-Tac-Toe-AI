@@ -315,14 +315,12 @@ Private Sub cmd_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x
     Dim i As Integer
     
     If Not endgame Then
-        If horwin() Or verwin() Or diawin() Or gridfilled Then endgame = True
-
-        gameover
+        If horwin() Or verwin() Or diawin() Or gridfilled Then endgame = True: gameover
         
-        If Not endgame Then
-            nextmove
-        End If
+        If Not endgame Then nextmove
     End If
+    
+    If horwin() Or verwin() Or diawin() Or gridfilled Then endgame = True: gameover
     
 End Sub
 
@@ -346,7 +344,8 @@ Public Sub reset()
         cmd(i - 1).Enabled = True
     Next i
     
-    If (Int(Rnd() * 100 + 1) - 1) / 50 = 0 Then nextmove
+    'If (Int(Rnd() * 100 + 1) - 1) / 50 = 0 Then
+    nextmove
 
 End Sub
 
