@@ -344,8 +344,7 @@ Public Sub reset()
         cmd(i - 1).Enabled = True
     Next i
     
-    'If (Int(Rnd() * 100 + 1) - 1) / 50 = 0 Then
-    nextmove
+    If (Int(Rnd() * 100 + 1) - 1) / 50 = 0 Then nextmove
 
 End Sub
 
