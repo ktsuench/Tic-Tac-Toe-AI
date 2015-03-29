@@ -226,7 +226,7 @@ Public Function dir(ByVal sdir As Integer, ByVal cond As Integer, ByVal inc As I
             If x = y And x = z Then res = -2: winner = IIf(x = "x", 1, 2)
         Else
             If Len(x) > 0 And Len(y) > 0 And x = "x" Then If x = y Then res = IIf(sdir = 1, i + 1, IIf(sdir = 2, i + 5, 7 + k))
-            If Len(x) > 0 And Len(z) > 0 And x = "X" Then If x = z Then res = IIf(sdir = 1, i, IIf(sdir = 2, i + 2, 4))
+            If Len(x) > 0 And Len(z) > 0 And x = "x" Then If x = z Then res = IIf(sdir = 1, i, IIf(sdir = 2, i + 2, 4))
             If Len(y) > 0 And Len(z) > 0 And y = "x" Then If y = z Then res = IIf(sdir = 1 Or sdir = 2, i - 1, 1 - k)
         End If
         
